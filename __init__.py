@@ -27,9 +27,44 @@ Para instalar librerias se debe ingresar por terminal a la carpeta "libs"
 from time import sleep
 from subprocess import Popen, PIPE
 import os
+
+base_path = tmp_global_obj["basepath"]
+cur_path = os.path.join(base_path, 'modules', 'Pdf2Img', 'libs')
+sys.path.append(cur_path)
+from PIL import Image
+from PyPDF2 import PdfFileReader, PdfFileWriter
+
+
+# Functions
+def pdf2Img(pdf, conf, img=None, dim = None):
+    global Popen, PIPE
+
+    print("**",pdf)
+    env = os.environ.copy()
+    base_path = tmp_global_obj["basepath"]
+
+    if img:
+        img = img.split(".jpg")[0]
+    else:
+        img = pdf.split(".pdf")[0]
+
+    scale = ""
+    if dim:
+        scale += "-W {x} -H {y} -sz".format(x=dim[0], y=dim[1]) 
+
+    popper = base_path + "modules" + os.sep + "Pdf2Img" + os.sep + "bin" + os.sep + "pdftoppm.exe" + conf + " -jpeg " + pdf + " " + \
+             str(img)
+    print(popper)
+    con = Popen(popper, env=env, shell=True, stdout=PIPE, stderr=PIPE)
+
+    a = con.communicate()
+    return a
+
 """
     Obtengo el modulo que fueron invocados
 """
+
+
 module = GetParams("module")
 
 if module == "toJpg":
@@ -39,23 +74,96 @@ if module == "toJpg":
     width = GetParams("width")
     ppx = GetParams("dpi")
     var_ = GetParams("result")
-    pdf = '"' + pdf + '"'
-
-    print('PATH',pdf)
+    
     r = True
     try:
-        env = os.environ.copy()
-        base_path  = tmp_global_obj["basepath"]
         conf = ""
         if ppx:
             conf = conf + " -r " + ppx
         if width:
             conf = conf + " -scale-to " + width
         
-        popper = base_path + "modules" + os.sep + "Pdf2Img" + os.sep + "bin" + os.sep + "pdftoppm.exe" + conf+" -jpeg " + pdf + " " + str(jpg).split(".jpg")[0]        
-        print(popper)
-        con = Popen(popper, env=env, shell=True, stdout=PIPE, stderr=PIPE)
-        a = con.communicate()
+        a = pdf2Img(pdf, conf, img=jpg)
         SetVar( var_,  str(a))
     except Exception as e:
         raise Exception(e)
+
+if module == "addImage":
+    pdf_path = GetParams("pdf").replace("/", os.sep)
+    jpg = GetParams("jpg").replace("/", os.sep)
+    page = GetParams("page")
+    coord = GetParams("coordinates")
+    pdf_new = GetParams("pdf_new")
+    result = GetParams("result")
+
+    try:
+        page = int(page) -1
+        if ";" in coord:
+            coord = coord.split(";")
+            for i in range(len(coord)):
+                coord[i] = eval(coord[i])
+        else:
+            coord = eval(coord)
+        
+        print("coord", coord)
+    except NameError:
+        PrintException()
+        raise e
+    try:
+        try:
+            os.mkdir("tmp")
+            os.mkdir("tmp"+os.sep+"pdf2img")
+        except:
+            try:
+                os.mkdir("tmp" + os.sep + "pdf2img")
+            except:
+                pass
+        tmp_path = base_path = tmp_global_obj["basepath"] + "tmp/pdf2img/tmp_pdf.pdf".replace("/", os.sep)
+        pdf = PdfFileReader(pdf_path, strict=False)
+        dim = (pdf.getPage(0).mediaBox.getWidth(), pdf.getPage(0).mediaBox.getHeight())
+        tmp = pdf.getPage(page)
+        pdf_writer = PdfFileWriter()
+        pdf_writer.addPage(tmp)
+        with open(tmp_path, 'wb') as out:
+            pdf_writer.write(out)
+
+        a = pdf2Img(tmp_path, conf="", dim=dim)
+
+        pdf_im = Image.open(tmp_path.split(".pdf")[0]+ "-1.jpg")
+        im = Image.open(jpg)
+        # pdf_im = pdf_im.resize(dim, resample=Image.ANTIALIAS)
+
+        if type(coord) is list:
+            for c in coord:
+                pdf_im.paste(im, c)
+        else:
+            pdf_im.paste(im, coord)
+        pdf_im.save(tmp_path)
+        pdf_im.save(tmp_path.split(".pdf")[0]+".jpg", 'JPEG',  quality=100)
+
+        pdf_writer = PdfFileWriter()
+        number_page = pdf.getNumPages()
+        pdf_img = PdfFileReader(tmp_path).getPage(0)
+
+
+        for i in range(number_page):
+
+            if i == page:
+                pdf_writer.addPage(pdf_img)
+                scale = float(dim[0] / pdf_writer.getPage(i).mediaBox.getWidth())
+                pdf_writer.getPage(i).scale(scale, scale)
+            else:
+                pdf_writer.addPage(pdf.getPage(i))
+
+            print((pdf_writer.getPage(i).mediaBox.getWidth(), pdf_writer.getPage(i).mediaBox.getHeight()))
+
+
+        with open(pdf_new, 'wb') as fh:
+            pdf_writer.write(fh)
+
+        SetVar(result, True)
+
+    except Exception as e:
+        PrintException()
+        raise Exception(e)
+
