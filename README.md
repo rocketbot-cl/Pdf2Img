@@ -3,7 +3,10 @@
  
  **In the example robot you must change the URL's for yours.
  
+![alt text](https://raw.githubusercontent.com/rocketbot-cl/Pdf2Jpg/master/example/pdf2jpg2.png)
+
 ![alt text](https://raw.githubusercontent.com/rocketbot-cl/Pdf2Jpg/master/example/pdf2jpg.png)
+
 
 <h2>Dependencies</h2>
 
