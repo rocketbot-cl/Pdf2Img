@@ -35,6 +35,7 @@ from PIL import Image
 from PyPDF2 import PdfFileReader, PdfFileWriter
 
 
+
 # Functions
 def pdf2Img(pdf, conf, img=None, dim = None):
     global Popen, PIPE
@@ -48,6 +49,8 @@ def pdf2Img(pdf, conf, img=None, dim = None):
     else:
         img = pdf.split(".pdf")[0]
 
+    print(img)
+
     scale = ""
     if dim:
         scale += "-W {x} -H {y} -sz".format(x=dim[0], y=dim[1]) 
@@ -60,6 +63,18 @@ def pdf2Img(pdf, conf, img=None, dim = None):
     a = con.communicate()
     return a
 
+def makeTmpDir(name):
+    try:
+        os.mkdir("tmp")
+        os.mkdir("tmp" + os.sep + name)
+    except:
+        try:
+            os.mkdir("tmp" + os.sep + name)
+        except:
+            pass
+
+    return os.sep.join(["tmp", name])
+
 """
     Obtengo el modulo que fueron invocados
 """
@@ -68,7 +83,6 @@ def pdf2Img(pdf, conf, img=None, dim = None):
 module = GetParams("module")
 
 if module == "toJpg":
-    print("Entro")
     pdf = GetParams("pdf").replace("/",os.sep)
     jpg = GetParams("jpg").replace("/",os.sep)
     width = GetParams("width")
@@ -110,16 +124,8 @@ if module == "addImage":
         PrintException()
         raise e
     try:
-        try:
-            os.mkdir("tmp")
-            os.mkdir("tmp"+os.sep+"pdf2img")
-        except:
-            try:
-                os.mkdir("tmp" + os.sep + "pdf2img")
-            except:
-                pass
-        tmp_path = base_path = tmp_global_obj["basepath"] + "tmp/pdf2img/tmp_pdf.pdf".replace("/", os.sep)
-        pdf = PdfFileReader(pdf_path, strict=False)
+        tmp_path = makeTmpDir("pdf2img") + os.sep + "tmp_pdf.pdf"
+        pdf = PdfFileReader(pdf_path)
         dim = (pdf.getPage(0).mediaBox.getWidth(), pdf.getPage(0).mediaBox.getHeight())
         tmp = pdf.getPage(page)
         pdf_writer = PdfFileWriter()
@@ -167,3 +173,32 @@ if module == "addImage":
         PrintException()
         raise Exception(e)
 
+if module == "cropImage":
+    pdf_path = GetParams("pdf")
+    image_path = GetParams("jpg")
+    coord = GetParams("coordinates")
+    size = GetParams("size")
+    page = GetParams("page")
+
+    tmp_path = makeTmpDir("pdf2img") + os.sep + "tmp.pdf"
+
+    try:
+        coord = eval(coord)
+        size = eval(size)
+
+        pdf = PdfFileReader(pdf_path)
+        tmp = pdf.getPage(int(page) - 1)
+        pdf_writer = PdfFileWriter()
+        pdf_writer.addPage(tmp)
+        with open(tmp_path, 'wb') as out:
+            pdf_writer.write(out)
+
+        a = pdf2Img(tmp_path, conf="", dim="")
+
+        img = tmp_path.replace(".pdf", "-1.jpg")
+        pdf_im = Image.open(img)
+        pdf_im.crop(coord+size).save(image_path)
+
+    except Exception as e:
+        PrintException()
+        raise e
