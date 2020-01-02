@@ -1,4 +1,4 @@
-# Pdf2Jpg
+# Pdf2Img
  Module to convert a PDF file into an image .jpg
  
  **In the example robot you must change the URL's for yours.
@@ -7,6 +7,9 @@
 
 ![alt text](https://raw.githubusercontent.com/rocketbot-cl/Pdf2Jpg/master/example/pdf2jpg.png)
 
+<strong>Video Example:</strong>
+
+[![Pdf2Img](https://img.youtube.com/vi/uIBfzv-qimw/0.jpg)](https://www.youtube.com/watch?v=uIBfzv-qimw "PDF2iMG")
 
 <h2>Dependencies</h2>
 
