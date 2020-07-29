@@ -395,7 +395,7 @@ if module == "cropImage":
             pdf_writer.write(out)
 
         if not dpi:
-            dpi = 300
+            dpi = 150
         conf = f"-r {dpi}"
 
         a = pdf2Img(tmp_path, conf=conf, dim="", format_="-png")
