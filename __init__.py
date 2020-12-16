@@ -36,7 +36,7 @@ from PyPDF2 import PdfFileReader, PdfFileWriter
 
 
 # Functions
-def pdf2Img(pdf, conf, img=None, dim=None, format_="-jpg"):
+def pdf2Img(pdf, conf, img=None, dim=None, format_="-jpeg"):
     global Popen, PIPE
 
     print("**", pdf)
@@ -54,8 +54,9 @@ def pdf2Img(pdf, conf, img=None, dim=None, format_="-jpg"):
     if dim:
         scale += "-W {x} -H {y} -sz".format(x=dim[0], y=dim[1])
 
-    popper = base_path + "modules" + os.sep + "Pdf2Img" + os.sep + "bin" + os.sep + "pdftoppm.exe " + conf + " "+ format_ + " " + pdf + " " + \
-             str(img)
+    popper = base_path + "modules" + os.sep + "Pdf2Img" + os.sep + "bin" + os.sep + "pdftoppm.exe " + conf + " " + format_ + " " + '"' + pdf + '"' + " " + \
+             '"' + str(img) + '"'
+
     print(popper)
     con = Popen(popper, env=env, shell=True, stdout=PIPE, stderr=PIPE)
 
@@ -238,7 +239,7 @@ from PyPDF2 import PdfFileReader, PdfFileWriter
 
 
 # Functions
-def pdf2Img(pdf, conf, img=None, dim=None, format_="-jpg"):
+def pdf2Img(pdf, conf, img=None, dim=None, format_="-jpeg"):
     global Popen, PIPE
 
     print("**", pdf)
@@ -256,8 +257,8 @@ def pdf2Img(pdf, conf, img=None, dim=None, format_="-jpg"):
     if dim:
         scale += "-W {x} -H {y} -sz".format(x=dim[0], y=dim[1])
 
-    popper = base_path + "modules" + os.sep + "Pdf2Img" + os.sep + "bin" + os.sep + "pdftoppm.exe " + conf + " "+ format_ + " " + pdf + " " + \
-             str(img)
+    popper = base_path + "modules" + os.sep + "Pdf2Img" + os.sep + "bin" + os.sep + "pdftoppm.exe " + conf + " "+ format_ + " " + '"' + pdf + '"' + " " + \
+             '"' + str(img) + '"'
     print(popper)
     con = Popen(popper, env=env, shell=True, stdout=PIPE, stderr=PIPE)
 
