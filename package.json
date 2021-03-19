@@ -309,8 +309,8 @@
           {
             "type": "input",
             "title": {
-              "es": "Coordenadas",
-              "en": "Coordinates"
+              "es": "Coordenadas de Inicio",
+              "en": "Start Coordinates"
             },
             "placeholder": {
               "es": "x,y",
@@ -322,12 +322,12 @@
           {
             "type": "input",
             "title": {
-              "es": "Dimensiones",
-              "en": "Size"
+              "es": "Coordenadas de Fin",
+              "en": "End Coordinates"
             },
             "placeholder": {
-              "es": "width, height",
-              "en": "width, height"
+              "es": "x,y",
+              "en": "x,y"
             },
             "id": "size",
             "css": "col-md-3"
