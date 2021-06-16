@@ -26,11 +26,12 @@ Para instalar librerias se debe ingresar por terminal a la carpeta "libs"
 
 from time import sleep
 from subprocess import Popen, PIPE
-import os
+import os, sys
 
 base_path = tmp_global_obj["basepath"]
 cur_path = os.path.join(base_path, 'modules', 'Pdf2Img', 'libs')
-sys.path.append(cur_path)
+if cur_path not in sys.path:
+    sys.path.append(cur_path)
 from PIL import Image
 from PyPDF2 import PdfFileReader, PdfFileWriter
 
@@ -51,11 +52,17 @@ def pdf2Img(pdf, conf, img=None, dim=None, format_="-jpeg"):
     print(img)
 
     scale = ""
+
+    executable = base_path + "modules" + os.sep + "Pdf2Img" + os.sep + "bin" + os.sep + "pdftoppm.exe"
+    popper = [executable, format_, pdf, img]
+    if conf:
+        popper.append(conf)
+
     if dim:
         scale += "-W {x} -H {y} -sz".format(x=dim[0], y=dim[1])
-
-    popper = base_path + "modules" + os.sep + "Pdf2Img" + os.sep + "bin" + os.sep + "pdftoppm.exe " + conf + " " + format_ + " " + '"' + pdf + '"' + " " + \
-             '"' + str(img) + '"'
+        popper.append(scale)
+    
+    # popper = [executable, conf + " " + format_ + " " + '"' + pdf + '"' + " " + '"' + str(img) + '.jpg"'
 
     print(popper)
     con = Popen(popper, env=env, shell=True, stdout=PIPE, stderr=PIPE)
@@ -99,7 +106,11 @@ if module == "toJpg":
             conf = conf + " -scale-to " + width
 
         a = pdf2Img(pdf, conf, img=jpg)
-        SetVar(var_, str(a))
+        a = a[1].decode()
+        response = False
+        if a != "No display font for 'ArialUnicode'":
+            response = True
+        SetVar(var_, response)
     except Exception as e:
         raise Exception(e)
 
@@ -186,12 +197,14 @@ if module == "cropImage":
         size = eval(size)
 
         pdf = PdfFileReader(pdf_path)
+        if pdf.isEncrypted:
+            pdf.decrypt('')
         tmp = pdf.getPage(int(page) - 1)
         pdf_writer = PdfFileWriter()
         pdf_writer.addPage(tmp)
         with open(tmp_path, 'wb') as out:
             pdf_writer.write(out)
-
+        
         a = pdf2Img(tmp_path, conf="-r 200", dim="", format_="-png")
 
         img = tmp_path.replace(".pdf", "-1.png")
