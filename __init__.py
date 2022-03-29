@@ -59,12 +59,11 @@ def pdf2Img(pdf, conf, img=None, dim=None, format_="-jpeg"):
         popper.append(conf)
 
     if dim:
-        scale += "-W {x} -H {y} -sz".format(x=dim[0], y=dim[1])
-        popper.append(scale)
+        scale += "-sz -W {x} -H {y}".format(x=dim[0], y=dim[1])
+        #popper = popper + scale.split(" ")
     
     # popper = [executable, conf + " " + format_ + " " + '"' + pdf + '"' + " " + '"' + str(img) + '.jpg"'
 
-    print(popper)
     con = Popen(popper, env=env, shell=True, stdout=PIPE, stderr=PIPE)
 
     a = con.communicate()
@@ -144,7 +143,7 @@ if module == "addImage":
         pdf_writer.addPage(tmp)
         with open(tmp_path, 'wb') as out:
             pdf_writer.write(out)
-
+        sleep(2)
         a = pdf2Img(tmp_path, conf="", dim=dim)
 
         pdf_im = Image.open(tmp_path.split(".pdf")[0] + "-1.jpg")
