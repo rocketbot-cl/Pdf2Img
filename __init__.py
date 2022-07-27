@@ -37,7 +37,7 @@ from PyPDF2 import PdfFileReader, PdfFileWriter
 
 
 # Functions
-def pdf2Img(pdf, conf, img=None, dim=None, format_="-jpeg"):
+def pdf2Img(pdf, img=None, format_="-jpeg"):
     global Popen, PIPE
 
     print("**", pdf)
@@ -49,20 +49,8 @@ def pdf2Img(pdf, conf, img=None, dim=None, format_="-jpeg"):
     else:
         img = pdf.split(".pdf")[0]
 
-    print(img)
-
-    scale = ""
-
     executable = base_path + "modules" + os.sep + "Pdf2Img" + os.sep + "bin" + os.sep + "pdftoppm.exe"
     popper = [executable, format_, pdf, img]
-    if conf:
-        popper.append(conf)
-
-    if dim:
-        scale += "-sz -W {x} -H {y}".format(x=dim[0], y=dim[1])
-        #popper = popper + scale.split(" ")
-    
-    # popper = [executable, conf + " " + format_ + " " + '"' + pdf + '"' + " " + '"' + str(img) + '.jpg"'
 
     con = Popen(popper, env=env, shell=True, stdout=PIPE, stderr=PIPE)
 
@@ -92,19 +80,11 @@ module = GetParams("module")
 if module == "toJpg":
     pdf = GetParams("pdf").replace("/", os.sep)
     jpg = GetParams("jpg").replace("/", os.sep)
-    width = GetParams("width")
-    ppx = GetParams("dpi")
     var_ = GetParams("result")
 
     r = True
     try:
-        conf = ""
-        if ppx:
-            conf = conf + " -r " + ppx
-        if width:
-            conf = conf + " -scale-to " + width
-
-        a = pdf2Img(pdf, conf, img=jpg)
+        a = pdf2Img(pdf, img=jpg)
         a = a[1].decode()
         response = False
         if a != "No display font for 'ArialUnicode'":
@@ -144,7 +124,7 @@ if module == "addImage":
         with open(tmp_path, 'wb') as out:
             pdf_writer.write(out)
         sleep(2)
-        a = pdf2Img(tmp_path, conf="", dim=dim)
+        a = pdf2Img(tmp_path)
 
         pdf_im = Image.open(tmp_path.split(".pdf")[0] + "-1.jpg")
         im = Image.open(jpg)
@@ -204,7 +184,7 @@ if module == "cropImage":
         with open(tmp_path, 'wb') as out:
             pdf_writer.write(out)
         
-        a = pdf2Img(tmp_path, conf="-r 200", dim="", format_="-png")
+        a = pdf2Img(tmp_path, format_="-png")
 
         img = tmp_path.replace(".pdf", "-1.png")
         pdf_im = Image.open(img)
