@@ -1,26 +1,26 @@
 # Pdf2Img
   
-Module to perform actions with a pdf file 
+Módulo para realizar ações com um arquivo pdf
 
 *Read this in other languages: [English](README.md), [Portugues](README.pr.md), [Español](README.es.md).*
 
-## How to install this module
+## Como instalar este módulo
   
-__Download__ and __install__ the content in 'modules' folder in Rocketbot path  
+__Baixe__ e __instale__ o conteúdo na pasta 'modules' no caminho do Rocketbot  
 
 
 
 ## Overview
 
 
-1. Convert to JPG  
-Convert each sheet of a pdf file to jpg format
+1. Converter para JPG  
+Converter cada folha de um arquivo pdf para o formato jpg
 
-2. Add image to PDF  
-Adds an image to a PDF on the page and coordinates entered.
+2. Adicionar imagem ao PDF  
+Adiciona uma imagem a um PDF na página e as coordenadas inseridas.
 
-3. Crop image from PDF  
-Create an image from the assigned coordinates.  
+3. Cortar imagem de PDF  
+Crie uma imagem a partir das coordenadas atribuídas.  
 
 
 

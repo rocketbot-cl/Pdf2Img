@@ -1,8 +1,8 @@
 {
   "author": "Danilo Toro",
-  "description": "Exporta un PDF a JPG",
+  "description": "Módulo para realizar acciones con un archivo pdf",
   "disclaimer": "THERE IS NO WARRANTY FOR THE PROGRAM, TO THE EXTENT PERMITTED BY APPLICABLE LAW. EXCEPT WHEN OTHERWISE STATED IN WRITING THE COPYRIGHT HOLDERS AND/OR OTHER PARTIES PROVIDE THE PROGRAM “AS IS” WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. THE ENTIRE RISK AS TO THE QUALITY AND PERFORMANCE OF THE PROGRAM IS WITH YOU. SHOULD THE PROGRAM PROVE DEFECTIVE, YOU ASSUME THE COST OF ALL NECESSARY SERVICING, REPAIR OR CORRECTION.",
-  "version": "1.4.1",
+  "version": "1.4.2",
   "license": "MIT",
   "homepage": "http://rocketbot.co",
   "linux": false,
@@ -17,26 +17,26 @@
   "title": {
     "en": "Pdf2Img",
     "es": "Pdf2Img",
-    "cn": "Pdf2Img"
+    "pr": "Pdf2Img"
   },
   "icon": "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/PjwhRE9DVFlQRSBzdmcgIFBVQkxJQyAnLS8vVzNDLy9EVEQgU1ZHIDEuMS8vRU4nICAnaHR0cDovL3d3dy53My5vcmcvR3JhcGhpY3MvU1ZHLzEuMS9EVEQvc3ZnMTEuZHRkJz48c3ZnIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgMCAwIDEyOCAxNzAiIGhlaWdodD0iMTcwcHgiIGlkPSJMYXllcl8xIiB2ZXJzaW9uPSIxLjEiIHZpZXdCb3g9IjAgMCAxMjggMTcwIiB3aWR0aD0iMTI4cHgiIHhtbDpzcGFjZT0icHJlc2VydmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiPjxnPjxwYXRoIGQ9Ik02My43OTgsMTIxSDU5djIyaDUuNDIyYzMuNzA5LDAsNi41Ni0xLjAyMyw4LjU1NC0yLjg5NmMxLjk5My0xLjg3MSwyLjk5LTQuNjM3LDIuOTktOC4yMDcgICBzLTAuOTk3LTYuMjAyLTIuOTktOC4xMjdDNzAuOTgxLDEyMS44NDYsNjcuOTIzLDEyMSw2My43OTgsMTIxeiIgZmlsbD0iIzIzMUYyMCIvPjxwYXRoIGQ9Ik0zNy43MjEsMTIyLjEzNmMtMS4yNjctMC44ODQtMy4yMzMtMS4xMzYtNS45MDItMS4xMzZIMjd2MTJoNS42NWMyLjcwNCwwLDQuNTQxLTAuNjI2LDUuNTEyLTEuNzE4ICAgYzAuOTcxLTEuMDkzLDEuNDU2LTIuNjMxLDEuNDU2LTQuNzI5QzM5LjYxOCwxMjQuNDU2LDM4Ljk4NSwxMjMuMDIsMzcuNzIxLDEyMi4xMzZ6IiBmaWxsPSIjMjMxRjIwIi8+PHBhdGggZD0iTTEyNy42MTMsMjlsMC4wMDQtMC4wMDRMOTksMC4zNzlWMGgtMC4zNzlsLTAuMTE3LTAuMTE3TDk4LjM4NywwSDEwQzQuNDc4LDAsMCw0LjQ3NywwLDEwdjE1MCAgIGMwLDUuNTIzLDQuNDc4LDEwLDEwLDEwaDEwOGM1LjUyMiwwLDEwLTQuNDc3LDEwLTEwVjI5SDEyNy42MTN6IE00NC4wMTMsMTM2LjgxMUM0MS4zOTUsMTM4Ljg5LDM3LjM5OSwxNDAsMzIuMDI2LDE0MEgyN3YxMGgtOCAgIHYtMzZoMTIuOTIzYzUuNTgxLDAsOS42NDYsMC45MSwxMi4xOTMsMy4wNzZjMi41NDgsMi4xNjcsMy44MjIsNS40NDMsMy44MjIsOS45MzJDNDcuOTM4LDEzMS40OTgsNDYuNjMsMTM0LjczLDQ0LjAxMywxMzYuODExeiAgICBNNzkuMDYsMTQ1LjA2MUM3NS42OCwxNDguMzU0LDcwLjUyMiwxNTAsNjMuNTksMTUwSDUxdi0zNmgxMy4wMDZjNi40ODEsMCwxMS40NTcsMS40MTIsMTQuOTI0LDQuNTg0ICAgYzMuNDY2LDMuMTcyLDUuMiw3LjQ5Niw1LjIsMTMuMTQ2Qzg0LjEzLDEzNy4zODIsODIuNDM5LDE0MS43NjgsNzkuMDYsMTQ1LjA2MXogTTExMywxMjFIOTZ2OGgxNnY3SDk2djE0aC04di0zNmgyNVYxMjF6IE0xMDksMjkgICBjLTUuNTIyLDAtMTAtNC40NzctMTAtMTBWNC42MjJMMTIzLjM3OSwyOUgxMDl6IiBmaWxsPSIjMjMxRjIwIi8+PC9nPjwvc3ZnPg==",
   "children": [
     {
       "en": {
-        "title": "Converir a JPG",
-        "description": "Convierte un pdf a jpg",
+        "title": "Convert to JPG",
+        "description": "Convert each sheet of a pdf file to jpg format",
         "title_options": null,
         "options": null
       },
       "es": {
-        "title": "Converir a JPG",
-        "description": "Convierte un pdf a jpg",
+        "title": "Convertir a JPG",
+        "description": "Convierte cada hoja de un archivo pdf a formato jpg",
         "title_options": null,
         "options": null
       },
-      "ch": {
-        "title": "Converir a JPG",
-        "description": "Convierte un pdf a jpg",
+      "pr": {
+        "title": "Converter para JPG",
+        "description": "Converter cada folha de um arquivo pdf para o formato jpg",
         "title_options": null,
         "options": null
       },
@@ -46,19 +46,24 @@
           {
             "type": "file_select",
             "placeholder": {
-              "es": "PDF",
-              "en": "PDF",
-              "cn": "PDF"
+              "es": "archivo.pdf",
+              "en": "file.pdf",
+              "pr": "arquivo.pdf"
             },
             "title": {
               "es": "PDF de entrada:",
-              "en": "PDF de entrada:",
-              "cn": "PDF de entrada:"
+              "en": "Input PDF:",
+              "pr": "Inserir PDF:"
+            },
+            "description": {
+              "es": "Ubicación de la carpeta donde se encuentra el PDF a convertir a JPG",
+              "en": "Location of the folder where the PDF to convert to JPG is located",
+              "pr": "Localização da pasta onde se encontra o PDF a converter para JPG"
             },
             "help": {
-              "es": "Path donde se encuentra el PDF a convertir",
-              "en": "Path donde se encuentra el PDF a convertir",
-              "cn": "Path donde se encuentra el PDF a convertir"
+              "es": "Ruta donde se encuentra el PDF a convertir",
+              "en": "Path where the PDF to convert is located",
+              "pr": "Caminho onde o PDF a ser convertido está localizado"
             },
             "id": "pdf",
             "css": "col-md-12"
@@ -66,49 +71,94 @@
           {
             "type": "file_new",
             "placeholder": {
-              "es": "JPG",
-              "en": "JPG",
-              "cn": "JPG"
+              "es": "C:/Users/User/Desktop/imagen.jpg",
+              "en": "C:/Users/User/Desktop/image.jpg",
+              "pr": "C:/Users/User/Desktop/imagem.jpg"
             },
             "title": {
-              "es": "Path y nombre de archivo JPG",
-              "en": "Path y nombre de archivo JPG",
-              "cn": "Path y nombre de archivo JPG"
+              "es": "Ruta y nombre del archivo jpg a guardar",
+              "en": "Path and name of the jpg file to save",
+              "pr": "Caminho e nome do arquivo jpg para salvar"
+            },
+            "description": {
+              "es": "Ubicación y nombre del archivo jpg que se guardará. Si el pdf contiene más de una hoja, se añadirá el numero de hoja a los archivos",
+              "en": "Location and name of the jpg file to be saved. If the pdf contains more than one sheet, the sheet number will be added to the files",
+              "pr": "Local e nome do arquivo jpg a ser salvo. Se o pdf contiver mais de uma folha, o número da folha será adicionado aos arquivos"
             },
             "id": "jpg",
             "css": "col-md-12"
           },
           {
             "type": "input",
+            "placeholder": {
+              "es": "1500",
+              "en": "1500",
+              "pr": "1500"
+            },
             "title": {
               "es": "Ancho de imagen",
               "en": "Ancho de imagen",
-              "cn": "Ancho de imagen"
+              "pr": "Ancho de imagen"
+            },
+            "description": {
+              "es": "Valor numérico que representará el ancho de la imagen en píxeles.",
+              "en": "Numeric value that will represent the width of the image in pixels.",
+              "pr": "Valor numérico que representará a largura da imagem em pixels."
+            },
+            "help": {
+              "es": "Opcional. Ingrese un valor numérico que representará el ancho de la imagen en píxeles.",
+              "en": "Optional. Enter a numeric value that will represent the width of the image in pixels.",
+              "pr": "Opcional. Insira um valor numérico que representará a largura da imagem em pixels."
             },
             "id": "width",
-            "css": "col-md-4"
+            "css": "col-md-6"
           },
           {
             "type": "input",
+            "placeholder": {
+              "es": "150",
+              "en": "150",
+              "pr": "150"
+            },
             "title": {
               "es": "DPI",
               "en": "DPI",
-              "cn": "DPI"
+              "pr": "DPI"
+            },
+            "description": {
+              "es": "DPI o Puntos por pulgada que tendrá la imagen. Por defecto son 150 DPI",
+              "en": "DPI or Dots per inch that the image will have. Default is 150 DPI",
+              "pr": "DPI ou Pontos por polegada que a imagem terá. O padrão é 150 DPI"
+            },
+            "help": {
+              "es": "Puntos por pulgada. Por defecto son 150DPI",
+              "en": "Dots per inch. Default is 150DPI",
+              "pr": "Pontos por polegada. O padrão é 150DPI"
             },
             "id": "dpi",
-            "css": "col-md-4"
+            "css": "col-md-6"
           },
           {
             "type": "input",
+            "placeholder": {
+              "es": "variable",
+              "en": "variable",
+              "pr": "variável"
+            },
             "title": {
               "es": "Resultado",
               "en": "Resultado",
-              "cn": "Resultado"
+              "pr": "Resultado"
+            },
+            "description": {
+              "es": "Variable donde será almacenado True o False dependiendo si el módulo pudo ejecutar la acción",
+              "en": "Variable where True or False will be stored depending on whether the module was able to execute the action",
+              "pr": "Variável onde será armazenado True ou False dependendo se o módulo foi capaz de executar a ação"
             },
             "help": {
               "es": "Variable donde se almacena el resultado sin {}",
-              "en": "Variable donde se almacena el resultado sin {}",
-              "cn": "Variable donde se almacena el resultado sin {}"
+              "en": "Variable where the result is stored without {}",
+              "pr": "Variável onde o resultado é armazenado sem {}"
             },
             "id": "result",
             "css": "col-md-6"
@@ -131,13 +181,19 @@
     {
       "es": {
         "title": "Agregar imagen a PDF",
-        "description": "Agrega una imagen a un PDF desde coordenadas",
+        "description": "Agrega una imagen a un PDF en la página y coordenadas ingresadas.",
         "title_options": null,
         "options": null
       },
       "en": {
         "title": "Add image to PDF",
-        "description": "Adds an image to PDF from coordinates",
+        "description": "Adds an image to a PDF on the page and coordinates entered.",
+        "title_options": null,
+        "options": null
+      },
+      "pr": {
+        "title": "Adicionar imagem ao PDF",
+        "description": "Adiciona uma imagem a um PDF na página e as coordenadas inseridas.",
         "title_options": null,
         "options": null
       },
@@ -147,13 +203,19 @@
           {
             "type": "file_select",
             "placeholder": {
-              "es": "PDF ",
-              "en": "PDF ",
-              "cn": "PDF "
+              "es": "archivo.pdf",
+              "en": "file.pdf",
+              "pr": "arquivo.pdf"
             },
             "title": {
               "es": "PDF de entrada:",
-              "en": "PDF:"
+              "en": "Input PDF:",
+              "pr": "Inserir PDF:"
+            },
+            "description": {
+              "es": "Archivo pdf al que se le añadirá la imagen",
+              "en": "PDF file to which the image will be added",
+              "pr": "Arquivo PDF ao qual a imagem será adicionada"
             },
             "id": "pdf",
             "css": "col-md-12"
@@ -161,22 +223,49 @@
           {
             "type": "file_select",
             "placeholder": {
-              "es": "JPG",
-              "en": "JPG",
-              "cn": "JPG"
+              "es": "path/imagen.jpg",
+              "en": "path/image.jpg",
+              "pr": "path/imagem.jpg"
             },
             "title": {
-              "es": "Path del archivo JPG a agregar:",
-              "en": "JPG path to add:"
+              "es": "archivo JPG:",
+              "en": "JPG file:",
+              "pr": "arquivo JPG:"
+            },
+            "description": {
+              "es": "Archivo jpg que será agregado al pdf",
+              "en": "jpg file that will be added to the pdf",
+              "pr": "Arquivo jpg que será adicionado ao pdf"
+            },
+            "help": {
+              "es": "Archivo jpg que será colocado en el pdf",
+              "en": "Jpg file that will be placed in the pdf",
+              "pr": "Arquivo jpg que será colocado no pdf"
             },
             "id": "jpg",
             "css": "col-md-12"
           },
           {
             "type": "input",
+            "placeholder": {
+              "es": "3",
+              "en": "3",
+              "pr": "3"
+            },
             "title": {
               "es": "Página",
-              "en": "Page"
+              "en": "Page",
+              "pr": "Página"
+            },
+            "description": {
+              "es": "Número de página del pdf donde será agregada la imagen",
+              "en": "Page number of the pdf where the image will be added",
+              "pr": "Número da página do pdf onde a imagem será adicionada"
+            },
+            "help": {
+              "es": "Número de página del pdf donde será agregada la imagen",
+              "en": "Page number of the pdf where the image will be added",
+              "pr": "Número da página do pdf onde a imagem será adicionada"
             },
             "id": "page",
             "css": "col-md-6"
@@ -184,16 +273,24 @@
           {
             "type": "input",
             "placeholder": {
-              "es": "150, 340",
-              "en": "150, 340"
+              "es": "150,340",
+              "en": "150,340",
+              "pr": "150,340"
             },
             "title": {
               "es": "Coordenadas",
-              "en": "coordinates"
+              "en": "Coordinates",
+              "pr": "Coordenadas"
+            },
+            "description": {
+              "es": "Coordenadas de la página del pdf donde se colocará la imagen. Si se colocan coordenadas más altas que el tamaño de la página, la imagen no se podrá visualizar.",
+              "en": "Coordinates of the pdf page where the image will be placed. If coordinates higher than the page size are placed, the image cannot be displayed.",
+              "pr": "Coordenadas da página pdf onde a imagem será colocada. Se forem colocadas coordenadas maiores que o tamanho da página, a imagem não poderá ser exibida."
             },
             "help": {
-              "es": "Path donde se encuentra el PDF a modificar",
-              "en": "PDF path to modify"
+              "es": "Coordenadas donde se ubicará la imagen",
+              "en": "Coordinates where the image will be located",
+              "pr": "Coordenadas onde a imagem será localizada"
             },
             "id": "coordinates",
             "css": "col-md-6"
@@ -201,32 +298,49 @@
           {
             "type": "file_new",
             "placeholder": {
-              "es": "PDF",
-              "en": "PDF",
-              "cn": "PDF"
+              "es": "path/nuevo_archivo.pdf",
+              "en": "path/new_file.pdf",
+              "pr": "path/novo_arquivo.pdf"
             },
             "title": {
               "es": "PDF de salida:",
-              "en": "PDF output:"
+              "en": "Output PDF:",
+              "pr": "PDF de saída:"
+            },
+            "description": {
+              "es": "Ubicación del archivo pdf generado con la nueva imagen",
+              "en": "Page number of the pdf where the image will be added",
+              "pr": "Número da página do pdf onde a imagem será adicionada"
             },
             "help": {
-              "es": "Path donde se guardará el PDF modificado",
-              "en": "Path where to save modified pdf"
+              "es": "Ruta y nombre del archivo donde se guardará el PDF modificado",
+              "en": "Path and name of the file where the modified PDF will be saved",
+              "pr": "Caminho e nome do arquivo onde o PDF modificado será salvo"
             },
             "id": "pdf_new",
             "css": "col-md-12"
           },
           {
             "type": "input",
+            "placeholder": {
+              "es": "variable",
+              "en": "variable",
+              "pr": "variável"
+            },
             "title": {
               "es": "Resultado",
               "en": "Resultado",
-              "cn": "Resultado"
+              "pr": "Resultado"
+            },
+            "description": {
+              "es": "Variable donde será almacenado True o False dependiendo si el módulo pudo ejecutar la acción",
+              "en": "Variable where True or False will be stored depending on whether the module was able to execute the action",
+              "pr": "Variável onde será armazenado True ou False dependendo se o módulo foi capaz de executar a ação"
             },
             "help": {
               "es": "Variable donde se almacena el resultado sin {}",
               "en": "Variable donde se almacena el resultado sin {}",
-              "cn": "Variable donde se almacena el resultado sin {}"
+              "pr": "Variable donde se almacena el resultado sin {}"
             },
             "id": "result",
             "css": "col-md-6"
@@ -249,13 +363,19 @@
     {
       "es": {
         "title": "Recortar imagen desde PDF",
-        "description": "Crea una imagen desde coordenadas",
+        "description": "Crea una imagen desde las coordenadas asignadas.",
         "title_options": null,
         "options": null
       },
       "en": {
         "title": "Crop image from PDF",
-        "description": "Create an image from coordinates",
+        "description": "Create an image from the assigned coordinates.",
+        "title_options": null,
+        "options": null
+      },
+      "pr": {
+        "title": "Cortar imagem de PDF",
+        "description": "Crie uma imagem a partir das coordenadas atribuídas.",
         "title_options": null,
         "options": null
       },
@@ -265,19 +385,24 @@
           {
             "type": "file_select",
             "placeholder": {
-              "es": "PDF",
-              "en": "PDF",
-              "cn": "PDF"
+              "es": "archivo.pdf",
+              "en": "file.pdf",
+              "pr": "arquivo.pdf"
             },
             "title": {
               "es": "PDF de entrada:",
-              "en": "PDF de entrada:",
-              "cn": "PDF de entrada:"
+              "en": "Input PDF:",
+              "pr": "Inserir PDF:"
+            },
+            "description": {
+              "es": "Archivo pdf que será utilizado en el módulo",
+              "en": "PDF file that will be used in the module",
+              "pr": "Arquivo PDF que será usado no módulo"
             },
             "help": {
-              "es": "Path donde se encuentra el PDF a convertir",
-              "en": "Path donde se encuentra el PDF a convertir",
-              "cn": "Path donde se encuentra el PDF a convertir"
+              "es": "Archivo pdf que será utilizado",
+              "en": "PDF file that will be used",
+              "pr": "Arquivo PDF que será usado"
             },
             "id": "pdf",
             "css": "col-md-12"
@@ -285,23 +410,49 @@
           {
             "type": "file_new",
             "placeholder": {
-              "es": "JPG",
-              "en": "JPG",
-              "cn": "JPG"
+              "es": "path/imagen.jpg",
+              "en": "path/image.jpg",
+              "pr": "path/imagem.jpg"
             },
             "title": {
-              "es": "Path y nombre de archivo JPG",
-              "en": "Path y nombre de archivo JPG",
-              "cn": "Path y nombre de archivo JPG"
+              "es": "Imagen jpg:",
+              "en": "jpg image:",
+              "pr": "imagem jpg:"
+            },
+            "description": {
+              "es": "Ruta y nombre que tendrá la imagen jpg extraída del pdf",
+              "en": "Path and name that the jpg image extracted from the pdf will have",
+              "pr": "Caminho e nome que a imagem jpg extraída do pdf terá"
+            },
+            "help": {
+              "es": "Ruta y nombre que tendrá la imagen jpg generada. Debe incluir la extensión .jpg",
+              "en": "Path and name that the generated jpg image will have. Must include the .jpg extension",
+              "pr": "Caminho e nome que a imagem jpg gerada terá. Deve incluir a extensão .jpg"
             },
             "id": "jpg",
             "css": "col-md-12"
           },
           {
             "type": "input",
+            "placeholder": {
+              "es": "3",
+              "en": "3",
+              "pr": "3"
+            },
             "title": {
               "es": "Página",
-              "en": "Page"
+              "en": "Page",
+              "pr": "Página"
+            },
+            "description": {
+              "es": "Número de página del pdf desde donde será obtenida la imagen",
+              "en": "Page number of the pdf from where the image will be obtained",
+              "pr": "Número da página do pdf de onde a imagem será obtida"
+            },
+            "help": {
+              "es": "Número de página del pdf desde donde será obtenida la imagen",
+              "en": "Page number of the pdf from where the image will be obtained",
+              "pr": "Número da página do pdf de onde a imagem será obtida"
             },
             "id": "page",
             "css": "col-md-3"
@@ -310,11 +461,23 @@
             "type": "input",
             "title": {
               "es": "Coordenadas de Inicio",
-              "en": "Start Coordinates"
+              "en": "Start Coordinates",
+              "pr": "Coordenadas de início"
             },
             "placeholder": {
-              "es": "x,y",
-              "en": "x,y"
+              "es": "0,0",
+              "en": "0,0",
+              "pr": "0,0"
+            },
+            "description": {
+              "es": "Coordenadas desde donde se obtendrá la imagen",
+              "en": "Coordinates from where the image will be obtained",
+              "pr": "Coordenadas de onde a imagem será obtida"
+            },
+            "help": {
+              "es": "Representado en píxeles. La imagen tendrá un tamaño equivalente a las coordenadas ingresadas.",
+              "en": "Represented in pixels. The image will have a size equivalent to the entered coordinates.",
+              "pr": "Representado em pixels. A imagem terá um tamanho equivalente às coordenadas inseridas."
             },
             "id": "coordinates",
             "css": "col-md-3"
@@ -323,24 +486,43 @@
             "type": "input",
             "title": {
               "es": "Coordenadas de Fin",
-              "en": "End Coordinates"
+              "en": "End Coordinates",
+              "pr": "Coordenadas finais"
             },
             "placeholder": {
-              "es": "x,y",
-              "en": "x,y"
+              "es": "1000,1000",
+              "en": "1000,1000",
+              "pr": "1000,1000"
+            },
+            "description": {
+              "es": "Coordenadas hasta donde se obtendrá la imagen",
+              "en": "Coordinates to where the image will be obtained",
+              "pr": "Coordenadas para onde a imagem será obtida"
             },
             "id": "size",
             "css": "col-md-3"
           },
           {
             "type": "input",
+            "placeholder": {
+              "es": "150",
+              "en": "150",
+              "pr": "150"
+            },
             "title": {
               "es": "DPI",
-              "en": "DPI"
+              "en": "DPI",
+              "pr": "DPI"
             },
-            "placeholder": {
-              "es": "300",
-              "en": "300"
+            "description": {
+              "es": "DPI o Puntos por pulgada que tendrá la imagen. Por defecto son 150 DPI",
+              "en": "DPI or Dots per inch that the image will have. Default is 150 DPI",
+              "pr": "DPI ou Pontos por polegada que a imagem terá. O padrão é 150 DPI"
+            },
+            "help": {
+              "es": "Puntos por pulgada. Por defecto son 150DPI",
+              "en": "Dots per inch. Default is 150DPI",
+              "pr": "Pontos por polegada. O padrão é 150DPI"
             },
             "id": "dpi",
             "css": "col-md-3"
