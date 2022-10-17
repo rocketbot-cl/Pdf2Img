@@ -55,18 +55,21 @@ def pdf2Img(pdf, conf, img=None, dim=None, format_="-jpeg"):
 
     executable = base_path + "modules" + os.sep + "Pdf2Img" + os.sep + "bin" + os.sep + "pdftoppm.exe"
     popper = [executable, format_, pdf, img]
+    
     if conf:
-        popper.append(conf)
+        for i in conf:
+            popper.append(i)
+
 
     if dim:
-        scale += "-W {x} -H {y} -sz".format(x=dim[0], y=dim[1])
-        popper.append(scale)
+        scale += "-sz -W {x} -H {y}".format(x=dim[0], y=dim[1])
+        #popper = popper + scale.split(" ")
     
     # popper = [executable, conf + " " + format_ + " " + '"' + pdf + '"' + " " + '"' + str(img) + '.jpg"'
 
-    print(popper)
     con = Popen(popper, env=env, shell=True, stdout=PIPE, stderr=PIPE)
-
+    print(popper)
+    
     a = con.communicate()
     return a
 
@@ -99,11 +102,18 @@ if module == "toJpg":
 
     r = True
     try:
-        conf = ""
+        # conf = ""
+        conf = []
         if ppx:
-            conf = conf + " -r " + ppx
+            # conf = conf + " -r " + ppx
+            conf.append("-r")
+            conf.append(ppx)
         if width:
-            conf = conf + " -scale-to " + width
+            # conf = conf + " -scale-to " + width
+            conf.append("-scale-to")
+            conf.append(width)
+        
+        # conf = "-scale-to-x"
 
         a = pdf2Img(pdf, conf, img=jpg)
         a = a[1].decode()
@@ -144,7 +154,7 @@ if module == "addImage":
         pdf_writer.addPage(tmp)
         with open(tmp_path, 'wb') as out:
             pdf_writer.write(out)
-
+        sleep(2)
         a = pdf2Img(tmp_path, conf="", dim=dim)
 
         pdf_im = Image.open(tmp_path.split(".pdf")[0] + "-1.jpg")
@@ -189,6 +199,7 @@ if module == "cropImage":
     coord = GetParams("coordinates")
     size = GetParams("size")
     page = GetParams("page")
+    dpi = GetParams("dpi")
 
     tmp_path = makeTmpDir("pdf2img") + os.sep + "tmp.pdf"
 
@@ -204,8 +215,16 @@ if module == "cropImage":
         pdf_writer.addPage(tmp)
         with open(tmp_path, 'wb') as out:
             pdf_writer.write(out)
+            
         
-        a = pdf2Img(tmp_path, conf="-r 200", dim="", format_="-png")
+            
+        if dpi:
+            conf = ["-r", dpi]
+        else:
+            conf = ["-r", "150"]
+        
+        
+        a = pdf2Img(tmp_path, conf, dim="", format_="-png")
 
         img = tmp_path.replace(".pdf", "-1.png")
         pdf_im = Image.open(img)
