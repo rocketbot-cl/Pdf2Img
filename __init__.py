@@ -26,14 +26,16 @@ Para instalar librerias se debe ingresar por terminal a la carpeta "libs"
 
 from time import sleep
 from subprocess import Popen, PIPE
-import os, sys
+import os
+import sys
 
 base_path = tmp_global_obj["basepath"]
 cur_path = os.path.join(base_path, 'modules', 'Pdf2Img', 'libs')
 if cur_path not in sys.path:
     sys.path.append(cur_path)
+
 from PIL import Image
-from PyPDF2 import PdfFileReader, PdfFileWriter
+from PyPDF2 import PdfReader, PdfWriter
 
 
 # Functions
@@ -55,7 +57,7 @@ def pdf2Img(pdf, conf, img=None, dim=None, format_="-jpeg"):
 
     executable = base_path + "modules" + os.sep + "Pdf2Img" + os.sep + "bin" + os.sep + "pdftoppm.exe"
     popper = [executable, format_, pdf, img]
-    
+
     if conf:
         for i in conf:
             popper.append(i)
@@ -142,47 +144,59 @@ if module == "addImage":
             coord = eval(coord)
 
         print("coord", coord)
-    except NameError:
+    except Exception as e:
         PrintException()
-        raise e
+        raise Exception(e)
+
     try:
         tmp_path = makeTmpDir("pdf2img") + os.sep + "tmp_pdf.pdf"
-        pdf = PdfFileReader(pdf_path)
-        dim = (pdf.getPage(0).mediaBox.getWidth(), pdf.getPage(0).mediaBox.getHeight())
-        tmp = pdf.getPage(page)
-        pdf_writer = PdfFileWriter()
-        pdf_writer.addPage(tmp)
-        with open(tmp_path, 'wb') as out:
-            pdf_writer.write(out)
+
+        with open(pdf_path, "rb") as f:
+            pdf = PdfReader(f)
+            first_page = pdf.pages[0]
+            dim = (
+                float(first_page.mediabox.width),
+                float(first_page.mediabox.height)
+            )
+
+            tmp = pdf.pages[page]
+            pdf_writer = PdfWriter()
+            pdf_writer.add_page(tmp)
+
+            with open(tmp_path, 'wb') as out:
+                pdf_writer.write(out)
+
         sleep(2)
-        a = pdf2Img(tmp_path, conf="", dim=dim)
+        pdf2Img(tmp_path, conf="", dim=dim)
 
         pdf_im = Image.open(tmp_path.split(".pdf")[0] + "-1.jpg")
         im = Image.open(jpg)
         # pdf_im = pdf_im.resize(dim, resample=Image.ANTIALIAS)
 
-        if type(coord) is list:
+        if isinstance(coord, list):
             for c in coord:
                 pdf_im.paste(im, c)
         else:
             pdf_im.paste(im, coord)
+
         pdf_im.save(tmp_path)
         pdf_im.save(tmp_path.split(".pdf")[0] + ".jpg", 'JPEG', quality=100)
 
-        pdf_writer = PdfFileWriter()
-        number_page = pdf.getNumPages()
-        pdf_img = PdfFileReader(tmp_path).getPage(0)
+        pdf_writer = PdfWriter()
 
-        for i in range(number_page):
+        with open(pdf_path, "rb") as f_original:
+            pdf_original = PdfReader(f_original)
+            number_page = len(pdf_original.pages)
 
-            if i == page:
-                pdf_writer.addPage(pdf_img)
-                scale = float(dim[0] / pdf_writer.getPage(i).mediaBox.getWidth())
-                pdf_writer.getPage(i).scale(scale, scale)
-            else:
-                pdf_writer.addPage(pdf.getPage(i))
+            with open(tmp_path, "rb") as f_img:
+                pdf_img_reader = PdfReader(f_img)
+                pdf_img = pdf_img_reader.pages[0]
 
-            print((pdf_writer.getPage(i).mediaBox.getWidth(), pdf_writer.getPage(i).mediaBox.getHeight()))
+                for i in range(number_page):
+                    if i == page:
+                        pdf_writer.add_page(pdf_img)
+                    else:
+                        pdf_writer.add_page(pdf_original.pages[i])
 
         with open(pdf_new, 'wb') as fh:
             pdf_writer.write(fh)
@@ -207,29 +221,50 @@ if module == "cropImage":
         coord = eval(coord)
         size = eval(size)
 
-        pdf = PdfFileReader(pdf_path)
-        if pdf.isEncrypted:
-            pdf.decrypt('')
-        tmp = pdf.getPage(int(page) - 1)
-        pdf_writer = PdfFileWriter()
-        pdf_writer.addPage(tmp)
-        with open(tmp_path, 'wb') as out:
-            pdf_writer.write(out)
-            
-        
-            
+        with open(pdf_path, "rb") as f:
+            pdf = PdfReader(f)
+
+            if pdf.is_encrypted:
+                try:
+                    pdf.decrypt('')
+                except:
+                    pass
+
+            tmp = pdf.pages[int(page) - 1]
+            pdf_writer = PdfWriter()
+            pdf_writer.add_page(tmp)
+
+            with open(tmp_path, 'wb') as out:
+                pdf_writer.write(out)
+
         if dpi:
             conf = ["-r", dpi]
         else:
             conf = ["-r", "150"]
-        
-        
-        a = pdf2Img(tmp_path, conf, dim="", format_="-png")
 
-        img = tmp_path.replace(".pdf", "-1.png")
+        ext = os.path.splitext(image_path)[1].lower()
+
+        if ext == ".png":
+            pdf2Img(tmp_path, conf, dim="", format_="-png")
+            img = tmp_path.replace(".pdf", "-1.png")
+
+        elif ext in [".jpg", ".jpeg"]:
+            pdf2Img(tmp_path, conf, dim="", format_="-jpeg")
+            img = tmp_path.replace(".pdf", "-1.jpg")
+
+        else:
+            raise Exception("Formato de salida no soportado. Usa .png, .jpg o .jpeg")
+
         pdf_im = Image.open(img)
-        pdf_im.crop(coord + size).save(image_path)
+        cropped = pdf_im.crop(coord + size)
+
+        if ext == ".png":
+            cropped.save(image_path, format="PNG")
+        else:
+            cropped = cropped.convert("RGB")
+            cropped.save(image_path, format="JPEG", quality=100)
 
     except Exception as e:
         PrintException()
         raise e
+
