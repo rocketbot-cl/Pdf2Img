@@ -1,7 +1,3 @@
-
-
-
-
 # Pdf2Img
   
 Module for performing actions with a PDF file  
